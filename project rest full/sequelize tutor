@@ -1,0 +1,24 @@
+npx sequelize-cli model:generate --name User --attributes username:string,email:string,fullname:string,password:string,picture:string,bio:string,createdBy:integer,updatedBy:integer,deletedBy:integer,deleteAt:date,isDeleted:boolean
+ 
+ itu contoh untuk membuat table dengan sequelize modul migration
+
+ npx sequelize-cli model:generate --name User --attributes
+ di atas --User itu nama tabel nya yang akan di buat di vs code di 
+
+ npx sequelize-cli db:migrate "code ini untuk membuat tabel otomatis yang masuk di mysql / phpmyadmin
+ datanya dari mana tabelnya ? isi model dan migrasi" 
+
+  npx sequelize-cli seed:generate --name default-user "untuk membuat file seeders"
+
+
+ untuk menoaktifkan tambahan huruf s pada table sequelize tambahak kode di folder config file config json
+
+ "define": {
+      "timestamps": true,
+      "freezeTableName": true
+    }
+
+    dibawah dialect mysql
+
+
+$ npx sequelize-cli db:seed:all

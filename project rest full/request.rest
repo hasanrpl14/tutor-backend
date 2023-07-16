@@ -1,0 +1,132 @@
+GET  http://localhost:4000/users
+
+### 
+POST http://localhost:4000/user
+Content-Type: application/json
+
+{
+    "name": "hasan",
+    "email": "email@gmail.com",
+    "password": "123456",
+    "confPassword": "123456"
+}
+
+
+GET http://localhost:4000/negara
+
+###
+GET http://localhost:4000/negara/3
+
+###
+POST http://localhost:4000/negara
+Content-Type: application/json
+
+{
+    "namaNegara": "Korea"
+}
+
+###
+PUT http://localhost:4000/negara/3
+Content-Type: application/json
+
+{
+    "namaNegara": "Eropa"
+}
+
+###
+DELETE http://localhost:4000/negara/3
+
+
+///Rumah Produksi
+###
+GET http://localhost:4000/rumahproduksi
+
+###
+GET http://localhost:4000/rumahproduksi/2
+
+###
+POST http://localhost:4000/rumahproduksi/
+Content-Type: application/json
+
+{
+    "namaRumahProduksi" : "DCU",
+    "tahunBerdiri" : 2010
+}
+
+###
+PUT http://localhost:4000/rumahproduksi/1
+Content-Type: application/json
+
+{
+    "namaRumahProduksi" : "Marvel",
+    "tahunBerdiri" : 1999
+}
+
+###
+DELETE http://localhost:4000/rumahproduksi/6
+
+//Artis
+###
+GET http://localhost:4000/artis/
+
+###
+GET http://localhost:4000/artis/:id
+
+###
+POST http://localhost:4000/artis/
+Content-Type: application/json
+
+{
+    "namaArtis" : "Sakura",
+    "tahunLahir" : 1999,
+    "kewarganegaraan" : 4
+}
+
+###
+PUT http://localhost:4000/artis/1
+Content-Type: application/json
+
+{
+    "namaArtis" : "Naruto U",
+    "tahunLahir" : 1999,
+    "kewarganegaraan" : 2
+}
+
+###
+DELETE http://localhost:4000/artis/3
+
+//Film
+###
+GET http://localhost:4000/film
+
+###
+GET http://localhost:4000/film/1
+
+###
+POST http://localhost:4000/film
+Content-Type: application/json
+
+{
+    "judulFilm" : "Oke",
+    "deskFilm" : "Petualangan laut",
+    "artisId" : 2,
+    "rumahProduksiId" : 2,
+    "tahun" : 2000,
+    "negaraId" : 2
+}
+
+###
+PUT http://localhost:4000/film/2
+Content-Type: application/json
+
+{
+    "judulFilm" : "Spiderman",
+    "deskFilm" : "Petualangan Bocah Laba-laba",
+    "artisId" : 2,
+    "rumahProduksiId" : 2,
+    "tahun" : 1999,
+    "negaraId" : 2
+}
+
+###
+DELETE http://localhost:4000/film/2
