@@ -54,7 +54,7 @@ function signup(req, res, next){
 function read(req, res, next){
     // res.render('index', { title: 'Read User Data'});
     User.findAll({
-        where : { isDeleted: false},
+        where : { isDeleted: false}
     }).then(users => {
         res.send(users);
     }).catch(err => {
@@ -133,7 +133,7 @@ function destroy(req, res, next){
 
     // SOFT DELETE
     const data = {
-    isDeleted : false,
+    isDeleted : true,
     deletedAt : new Date(),
     deletedBy : 1
     }
