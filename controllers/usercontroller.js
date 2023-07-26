@@ -199,7 +199,7 @@ function destroy(req, res, next) {
 
   // SOFT DELETE
   const data = {
-    isDeleted: false,
+    isDeleted: true,
     deletedAt: new Date(),
     deletedBy: 1,
   };
@@ -221,26 +221,26 @@ function destroy(req, res, next) {
 // LOGIN USER (SIGNIN)
 function signin(req, res, next) {
   User.findOne({
-    where: {
-      username: req.body.username,
-      password: req.body.password,
-      email: req.body.email,
-    },
+    where: { email: req.body.email },
   })
     .then((user) => {
       if (user) {
         if (user.isDeleted == false) {
-          if (user.password == req.body.password) {
-            res.status(200).json({
-              message: "Success",
-              data: user,
-            });
-          } else {
-            res.status(401).json({
-              message: "wrong password",
-              data: user,
-            });
-          }
+          bcrypt.compare(req.body.password, user.password, function (err, result) {
+            if (result) {
+              res.status(200).json({
+                status: "SUKSES",
+                message: "Success",
+                data: user,
+              });
+            } else {
+              res.status(401).json({
+                status: "FAILED",
+                pesan: "wrong password",
+                data: err,
+              });
+            }
+          });
         } else {
           res.status(401).json({
             message: "User deleted",
