@@ -87,6 +87,25 @@ function read(req, res, next) {
     });
 }
 
+// READ USER BY USERNAME
+
+function nama(req, res, next) {
+  User.findAll({
+    where : { username: req.params.username},
+  }).then(users => {
+    if (user) {
+      // Email sudah di gunakan
+      res.status(400).json({
+        message: "nama sudah ada",
+      });
+    }
+    res.send(users);
+  }).catch(err => {
+        res.send(err);
+});
+
+}
+
 // READ USER BY ID
 function readById(req, res, next) {
   // User.findAll({
@@ -221,6 +240,7 @@ function signin(req, res, next) {
 module.exports = {
   signup,
   read,
+  nama,
   readById,
   update,
   destroy,
