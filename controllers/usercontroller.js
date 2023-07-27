@@ -1,9 +1,12 @@
 const { User } = require("../models/");
 const Validator = require("fastest-validator");
 
+const jwt =  require("jsonwebtoken")
+
 const v = new Validator();
 
 const bcrypt = require("bcrypt");
+const { token } = require("morgan");
 
 // MEMBUAT USER (SIGNUP) REGISTER
 function signup(req, res, next) {
@@ -247,12 +250,23 @@ function signin(req, res, next) {
       if (user) {
         if (user.isDeleted == false) {
           bcrypt.compare(req.body.password, user.password, function (err, result) {
+
             if (result) {
+              //Pembuatan Token saat login sukses   
+            const token = jwt.sign({
+              email : user.email,
+              username : user.username,
+              userid : user.id,
+            }, 'rahasia', function(err, token){
+
               res.status(200).json({
                 status: "SUKSES",
-                message: "Success",
-                data: user,
+                message: "Success login",
+                token: token,
+                // data: user,
               });
+            });
+
             } else {
               res.status(401).json({
                 status: "FAILED",
