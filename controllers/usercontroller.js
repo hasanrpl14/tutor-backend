@@ -6,7 +6,9 @@ const jwt =  require("jsonwebtoken")
 const v = new Validator();
 
 const bcrypt = require("bcrypt");
-const { token } = require("morgan");
+
+require("dotenv").config();
+const JWT_SECRET = process.env.JWT_SECRET
 
 // MEMBUAT USER (SIGNUP) REGISTER
 function signup(req, res, next) {
@@ -243,6 +245,8 @@ function destroy(req, res, next) {
 
 // LOGIN USER (SIGNIN)
 function signin(req, res, next) {
+  // User.findone User itu nama tabelnya fidOne untuk mengabil data where { email: req.body.email} artinya itu masuk kedalam 
+  // table didalam database untuk mengecek email yang ada di database
   User.findOne({
     where: { email: req.body.email },
   })
@@ -250,19 +254,21 @@ function signin(req, res, next) {
       if (user) {
         if (user.isDeleted == false) {
           bcrypt.compare(req.body.password, user.password, function (err, result) {
-
+            // bcrypt.compare(req.body.password, user.password, function (err, result) {
+      // data di atas untuk memabndingkan apakah user saat memasukkan password datanya sama yang ada di database
             if (result) {
               //Pembuatan Token saat login sukses   
             const token = jwt.sign({
               email : user.email,
               username : user.username,
               userid : user.id,
-            }, 'rahasia', function(err, token){
+            }, JWT_SECRET, function(err, token){
 
               res.status(200).json({
                 status: "SUKSES",
                 message: "Success login",
                 token: token,
+                // JWT_SECRET: JWT_SECRET
                 // data: user,
               });
             });
